@@ -1,0 +1,183 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" > 
+	<link rel="stylesheet" href="css/font-awesome.min.css" > 
+	<style>
+		label{
+			margin: 0px;
+			font-size: 14
+		}
+
+		.padmin{
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+
+		.txtsize{
+			size: 20px
+		}
+
+		.btn {
+			box-shadow: none !important;
+			outline: 0;
+		}
+
+		.list-group-item a.btn.collapsed i {
+			transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			transition: .3s transform ease-in-out;
+		}
+
+		.list-group-item a.btn i {
+			transform: rotate(90deg);
+			-webkit-transform: rotate(90deg);
+			transition: .3s transform ease-in-out;
+		}
+
+		.list-group-item-heading a {
+			padding-left: 0
+		}
+	</style>
+    
+  </head>
+  <body>
+    <br>
+	<div class="container">
+		<ul class="list-group">
+			<li class="list-group-item padmin">
+				<div class="list-group-item-heading">
+					<a class="btn collapsed" data-toggle="collapse" href=".coll1" role="button" aria-expanded="true" aria-controls="coll1">
+						<i class="fa fa-caret-right" aria-hidden="true"></i> &ltnew1&gt
+					</a>
+				</div>
+				<div class="list-group-item-text">
+					<div class="form-row">
+						<div class="input-group-sm col-md-2">
+								<label for="tp1">Selecione</label>
+								<select class="form-control" id="tp1">
+									<option>Seção</option>
+									<option>Campo</option>
+								</select>
+							</div>
+						<div class="input-group-sm col-md-3">
+							<label for="txt1">Nome</label>
+							<input type="text" class="form-control" id="txt1" />
+						</div>
+						<div class="input-group-sm col-md-3">
+							<label for="val1">Validação</label>
+							<select class="form-control" id="val1">
+								<option>CPF</option>
+								<option>CNPJ</option>
+							</select>
+						</div>
+						<div class="input-group-sm col-md-2">
+							<label for="obr1">Obrigatório?</label>
+							<select class="form-control" id="obr1">
+								<option>SIM</option>
+								<option>NÃO</option>
+							</select>
+						</div>
+						<div class="input-group-sm col-md-2">
+							<label for="ord2">Ordem</label>
+							<input type="text" class="form-control txtsize" id="ord2" />
+						</div>
+					</div>
+				</div>
+				
+			</li>
+			<li class="list-group-item padmin collapse coll1" id="collapseExample1">
+					<div class="list-group-item-heading">
+							<a class="btn collapsed" role="button">
+									<span class="mr-3"></span> &ltfilho1&gt
+							</a>
+					</div>
+					<div class="list-group-item-text">
+						<div class="form-row">
+								<div class="input-group-sm col-md-2">
+										<label for="tp2">Selecione</label>
+										<select class="form-control" id="tp2">
+											<option>Seção</option>
+											<option>Campo</option>
+										</select>
+									</div>
+								<div class="input-group-sm col-md-3">
+									<label for="txt2">Nome</label>
+									<input type="text" class="form-control" id="txt2" />
+								</div>
+								<div class="input-group-sm col-md-3">
+									<label for="val2">Validação</label>
+									<select class="form-control" id="val2">
+										<option>CPF</option>
+										<option>CNPJ</option>
+									</select>
+								</div>
+								<div class="input-group-sm col-md-2">
+									<label for="obr2">Obrigatório?</label>
+									<select class="form-control" id="obr2">
+										<option>SIM</option>
+										<option>NÃO</option>
+									</select>
+								</div>
+								<div class="input-group-sm col-md-2">
+									<label for="ord2">Ordem</label>
+									<input type="text" class="form-control txtsize" id="ord2" />
+								</div>
+							</div>
+					</div>
+			</li>
+			<li class="list-group-item padmin collapse coll1" id="collapseExample2">
+					<div class="list-group-item-heading">
+							<a class="btn collapsed" role="button">
+									<span class="mr-3"></span> &ltfilho2&gt
+							</a>
+					</div>
+					<div class="list-group-item-text">
+						<div class="form-row">
+								<div class="input-group-sm col-md-2">
+										<label for="tp2">Selecione</label>
+										<select class="form-control" id="tp2">
+											<option>Seção</option>
+											<option>Campo</option>
+										</select>
+									</div>
+								<div class="input-group-sm col-md-3">
+									<label for="txt2">Nome</label>
+									<input type="text" class="form-control" id="txt2" />
+								</div>
+								<div class="input-group-sm col-md-3">
+									<label for="val2">Validação</label>
+									<select class="form-control" id="val2">
+										<option>CPF</option>
+										<option>CNPJ</option>
+									</select>
+								</div>
+								<div class="input-group-sm col-md-2">
+									<label for="obr2">Obrigatório?</label>
+									<select class="form-control" id="obr2">
+										<option>SIM</option>
+										<option>NÃO</option>
+									</select>
+								</div>
+								<div class="input-group-sm col-md-2">
+									<label for="ord2">Ordem</label>
+									<input type="text" class="form-control txtsize" id="ord2" />
+								</div>
+							</div>
+					</div>
+			</li>
+		</ul>
+	</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	
+	<script></script>
+  </body>
+</html>

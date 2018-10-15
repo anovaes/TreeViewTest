@@ -1,0 +1,275 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" > 
+	<link rel="stylesheet" href="css/font-awesome.min.css" > 
+	<style>
+		label{
+			margin: 0px;
+			font-size: 14
+		}
+
+		.padmin{
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+
+		.txtsize{
+			size: 20px
+		}
+
+		.btn {
+			box-shadow: none !important;
+			outline: 0;
+		}
+
+		.list-group-item a.btn.collapsed i {
+			transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			transition: .3s transform ease-in-out;
+		}
+
+		.list-group-item a.btn i {
+			transform: rotate(90deg);
+			-webkit-transform: rotate(90deg);
+			transition: .3s transform ease-in-out;
+		}
+
+		.list-group-item-heading a {
+			padding-left: 0
+		}
+	</style>
+    
+  </head>
+  <body>
+    <br>
+	<div class="container">
+		<ul id="list" class="list-group">
+			
+		</ul>
+	</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	
+	<script>
+        var myObj = [
+            {
+                "id":"000011",
+                "nopai": null,
+                "hierarquia":null,
+                "tipo": "S",
+                "nome": "cadastro",
+                "validacao": "",
+                "obrigatorio": "S",
+                "ordem": "1",
+                "filhos":[
+                    {
+                        "id":"001121",
+                        "nopai": "000011",
+                        "hierarquia":["000011"],
+                        "tipo": "C",
+                        "nome": "id",
+                        "validacao": "",
+                        "obrigatorio": "N",
+                        "ordem": "2"
+                    },
+                    {
+                        "id":"001122",
+                        "nopai": "000011",
+                        "hierarquia":["000011"],
+                        "tipo": "C",
+                        "nome": "cod",
+                        "validacao": "",
+                        "obrigatorio": "S",
+                        "ordem": "3"
+                    },
+                    {
+                        "id":"001123",
+                        "nopai": "000011",
+                        "hierarquia":["000011"],
+                        "tipo": "S",
+                        "nome": "pessoa",
+                        "validacao": "",
+                        "obrigatorio": "S",
+                        "ordem": "4",
+                        "filhos":[
+                            {
+                                "id":"112331",
+                                "nopai": "001123",
+                                "hierarquia":["000011","001123"],
+                                "tipo": "C",
+                                "nome": "nome",
+                                "validacao": "",
+                                "obrigatorio": "N",
+                                "ordem": "5"
+                            },
+                            {
+                                "id":"112332",
+                                "nopai": "001123",
+                                "hierarquia":["000011","001123"],
+                                "tipo": "C",
+                                "nome": "cpf",
+                                "validacao": "CPF",
+                                "obrigatorio": "S",
+                                "ordem": "6"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+
+        function createList(obj){
+            for (j=0; j < obj.length; j++) {
+                createItem(obj[j].id, obj[j].nopai, obj[j].hierarquia, obj[j].tipo, obj[j].nome, obj[j].validacao, obj[j].obrigatorio, obj[j].ordem);
+
+                if(obj[j].filhos !=null && obj[j].filhos.length > 0) 
+                    createList(obj[j].filhos);
+            }
+        }
+
+        function createItem(id, nopai, hierarquia, tipo, nome, validacao, obrigatorio, ordem){
+
+            //Lista
+            var list = document.getElementById("list");
+
+            //item
+            var liMaster = document.createElement("li");
+            liMaster.id = "item" + id;
+
+            if (nopai != null) {
+                var classHierarquia = "";
+                
+                for (i=0; i < hierarquia.length; i++) {
+                    classHierarquia += " coll" + hierarquia[i];
+                }
+                
+                liMaster.className = "list-group-item collapse padmin" + classHierarquia;
+            }
+            else {
+                liMaster.className = "list-group-item padmin";
+            }
+            
+            //Header
+            var divHeading = document.createElement("div");
+            divHeading.className = "list-group-item-heading";
+
+            var anchorHeading = document.createElement("a");
+            anchorHeading.className = "btn collapsed";
+            anchorHeading.setAttribute("data-toggle", "collapse");
+
+            if (tipo == "S")
+            {
+                anchorHeading.setAttribute("href", ".coll" + id);
+                anchorHeading.setAttribute("role", "button");
+                anchorHeading.setAttribute("aria-expanded", "true");
+                anchorHeading.setAttribute("aria-controls", "coll" + id);
+            }
+            
+            var iHeading = document.createElement("i");
+            iHeading.className = "fa fa-caret-right";
+            anchorHeading.setAttribute("aria-hidden", "true");
+
+            var lblHeading = document.createTextNode("<"+nome+">");
+
+            //Text
+            var divText = document.createElement("div");
+            divText.className = "list-group-item-text";
+
+            var divRow = document.createElement("div");
+            divRow.className = "form-row";
+
+            var divGroupTipo = createSelect("Tip1", "Tipo", "2", [['Seção', 'S'],['Campo', 'C']], tipo);
+            var divGroupNome = createTextBox("txt1", "Nome", "3", nome);
+            var divGroupValidacao = createSelect("val1", "Validação", "3", [['', ''],['CPF', 'CPF'],['CNPJ', 'CNPJ']], validacao);
+            var divGroupObrigatorio = createSelect("obr1", "Obrigatório", "2", [['Sim', 'S'],['Não', 'N']], obrigatorio);
+            var divGroupOrdem = createTextBox("ord1", "Ordem", "2", ordem);
+
+            //Montagem
+            list.appendChild(liMaster);
+            liMaster.appendChild(divHeading);
+            
+
+            if (tipo == "S")
+            {
+                divHeading.appendChild(anchorHeading);
+                anchorHeading.appendChild(iHeading);
+                anchorHeading.appendChild(lblHeading);
+            }
+            else
+            {
+                divHeading.appendChild(lblHeading);
+            }
+            
+            liMaster.appendChild(divText);
+            divText.append(divRow);
+
+            divRow.appendChild(divGroupTipo);
+            divRow.appendChild(divGroupNome);
+            divRow.appendChild(divGroupValidacao);
+            divRow.appendChild(divGroupObrigatorio);
+            divRow.appendChild(divGroupOrdem);
+        }
+
+        function createTextBox(id, descricao, tamanho, valor) {
+            var divGroup = document.createElement("div");
+            divGroup.className = "input-group-sm col-md-" + tamanho;
+
+            var lbl = document.createElement("label");
+            lbl.setAttribute("for", id);
+            lbl.innerHTML = descricao;
+
+            var txt = document.createElement("input");
+            txt.type = "text";
+            txt.className = "form-control";
+            txt.id = id;
+            txt.value = valor;
+
+            divGroup.appendChild(lbl);
+            divGroup.appendChild(txt);
+
+            return divGroup;
+        }
+
+        function createSelect(id, descricao, tamanho, options, valor) {
+            var divGroup = document.createElement("div");
+            divGroup.className = "input-group-sm col-md-" + tamanho;
+
+            var lbl = document.createElement("label");
+            lbl.setAttribute("for", id);
+            lbl.innerHTML = descricao;
+
+            var slc = document.createElement("select");
+            slc.id = id;
+            slc.className = "form-control";
+
+            for (i=0; i < options.length; i++) {
+                var opt = document.createElement("option");
+                opt.innerHTML = options[i][0];
+                opt.value = options[i][1];
+
+                if (options[i][1] == valor)
+                    opt.selected = true;
+
+                slc.appendChild(opt);
+            }
+            
+            divGroup.appendChild(lbl);
+            divGroup.appendChild(slc);
+
+            return divGroup;
+        }
+
+        $( document ).ready(function() {
+            createList(myObj);
+        });
+    </script>
+  </body>
+</html>
